@@ -187,6 +187,16 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose }) =
             } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
                 setViewState('SUCCESS');
                 submitPhoneNumber(email, 'card-success');
+
+                // Trigger order confirmation email silently
+                try {
+                    fetch("https://dhufnozehayzjlsmnvdl.supabase.co/functions/v1/send-order-email", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, orderId: result.paymentIntent.id })
+                    }).catch(err => console.error("Email trigger failed:", err));
+                } catch (e) { }
+
                 setTimeout(() => { window.location.href = "https://architect.systeme.io/courses"; }, 2000);
             }
         } catch (err: any) {

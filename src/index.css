@@ -1,9 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+body {
+  background: #050505;
+  color: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-@layer base {
-  body {
-    @apply bg-surface-0 text-white font-sans overflow-x-hidden antialiased selection:bg-brand-primary selection:text-white;
-  }
+::selection {
+  background: rgba(249, 115, 22, 0.3);
+  color: white;
 }
